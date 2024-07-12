@@ -1,0 +1,21 @@
+{
+  "name": "impact-frames",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "frog dev"
+  },
+  "dependencies": {
+    "@hono/node-server": "latest",
+    "@tanstack/react-query": "^5.51.1",
+    "cors": "^2.8.5",
+    "frog": "latest",
+    "hono": "^4",
+    "viem": "^2.17.3",
+    "wagmi": "^2.10.10"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "typescript": "latest"
+  }
+}
