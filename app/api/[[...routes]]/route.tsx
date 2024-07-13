@@ -1,15 +1,17 @@
+/** @jsxImportSource frog/jsx */
+
 import { Button, Frog, TextInput } from "frog";
 import { devtools } from "frog/dev";
-import NFTABI from "./ABI/Proxycontract.json";
+import NFTABI from "@/ABI/Proxycontract.json";
 import { readContract } from "@wagmi/core";
 import cors from "cors";
 import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
-import { config } from "./config/wagmiConfig";
+import { config } from "@/config/wagmiConfig";
 import { sepolia } from "viem/chains";
 import { Address } from "viem";
 
-export const app = new Frog({
+const app = new Frog({
   title: "Impact Frames",
   assetsPath: "/",
   basePath: "/api",

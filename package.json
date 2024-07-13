@@ -1,21 +1,31 @@
 {
-  "name": "impact-frames",
+  "name": "impact-frames2",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "frog dev"
+    "dev": "next dev",
+    "deploy": "vercel",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@hono/node-server": "latest",
     "@tanstack/react-query": "^5.51.1",
     "cors": "^2.8.5",
     "frog": "latest",
     "hono": "^4",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
     "viem": "^2.17.3",
     "wagmi": "^2.10.10"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "typescript": "latest"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5",
+    "vercel": "^32.4.1"
   }
 }
