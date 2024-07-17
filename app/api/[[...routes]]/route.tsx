@@ -1,6 +1,7 @@
 /** @jsxImportSource frog/jsx */
 
 import { Button, Frog, TextInput } from "frog";
+
 import { devtools } from "frog/dev";
 import NFTABI from "@/ABI/Proxycontract.json";
 import { readContract } from "@wagmi/core";
@@ -10,11 +11,16 @@ import { config } from "@/config/wagmiConfig";
 import { sepolia } from "viem/chains";
 import { Address } from "viem";
 
-const app = new Frog({
+type State = {
+  quantity: number;
+};
+const app = new Frog<{ State: State }>({
   title: "Impact Frames",
   assetsPath: "/",
-
   basePath: "/api",
+  initialState: {
+    quantity: 0,
+  },
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 });
@@ -38,7 +44,9 @@ app.frame("/frame", async (c) => {
   });
   const data = await (await fetch(result as string)).json();
   console.log(data);
+
   return c.res({
+    //browserLocation: `http://localhost:3000/dashboard/collection/mint/${contractAdress}`,
     image: (
       <div
         style={{
