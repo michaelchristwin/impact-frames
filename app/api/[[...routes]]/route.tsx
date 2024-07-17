@@ -11,22 +11,18 @@ import { config } from "@/config/wagmiConfig";
 import { sepolia } from "viem/chains";
 import { Address } from "viem";
 
-type State = {
-  quantity: number;
-};
-const app = new Frog<{ State: State }>({
+const app = new Frog({
   title: "Impact Frames",
   assetsPath: "/",
   basePath: "/api",
-  initialState: {
-    quantity: 0,
-  },
+
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 });
-
+// test id = 0xe3B26f198D53516E3cbbF5B6919153834DEbC924
 // Uncomment to use Edge Runtime
 // export const runtime = 'edge'
+const frontendURL = process.env.NEXT_PUBLIC_FRONTEND as string;
 let contractAdress: string;
 app.frame("/frame", async (c) => {
   const { buttonValue, inputText, status } = c;
@@ -46,7 +42,7 @@ app.frame("/frame", async (c) => {
   console.log(data);
 
   return c.res({
-    //browserLocation: `http://localhost:3000/dashboard/collection/mint/${contractAdress}`,
+    browserLocation: `${frontendURL}/dashboard/collection/mint/${contractAdress}`,
     image: (
       <div
         style={{
