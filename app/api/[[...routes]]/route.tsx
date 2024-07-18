@@ -23,11 +23,12 @@ const app = new Frog({
 // Uncomment to use Edge Runtime
 // export const runtime = 'edge'
 const frontendURL = process.env.NEXT_PUBLIC_FRONTEND as string;
+
 let contractAdress: string;
+let unitPrice: bigint;
 app.frame("/frame", async (c) => {
-  const { buttonValue, inputText, status } = c;
-  const fruit = inputText || buttonValue;
-  //console.log(fruit);
+  const { inputText, status } = c;
+
   const query = c.req.query();
   contractAdress = query.id;
   console.log(query.id);
@@ -40,7 +41,14 @@ app.frame("/frame", async (c) => {
   });
   const data = await (await fetch(result as string)).json();
   console.log(data);
-
+  const price = await readContract(config, {
+    abi: NFTABI,
+    chainId: sepolia.id,
+    address: contractAdress as Address,
+    functionName: "_unitPrice",
+  });
+  console.log(price);
+  unitPrice = price as bigint;
   return c.res({
     browserLocation: `${frontendURL}/dashboard/collection/mint/${contractAdress}`,
     image: (
@@ -58,7 +66,11 @@ app.frame("/frame", async (c) => {
           width: "100%",
         }}
       >
-        <img alt="nft" src={data.image} />
+        <img
+          alt="nft"
+          src={data.image}
+          //style={{ width: "350px", height: "350px" }}
+        />
       </div>
     ),
     intents: [
@@ -71,12 +83,14 @@ app.frame("/frame", async (c) => {
 
 app.transaction("/buy", (c) => {
   const { inputText } = c;
+  console.log(inputText);
   return c.contract({
     abi: NFTABI,
     chainId: "eip155:11155111",
+    value: BigInt(BigInt(inputText || 1) * unitPrice),
     functionName: "mintBatch",
     to: contractAdress as Address,
-    args: [BigInt(inputText as string)],
+    args: [BigInt(inputText || 1)],
   });
 });
 

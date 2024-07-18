@@ -156,6 +156,11 @@
   },
   {
     "inputs": [],
+    "name": "PaymentError",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "SupplyExceeded",
     "type": "error"
   },
@@ -348,19 +353,6 @@
         "internalType": "bytes32",
         "name": "",
         "type": "bytes32"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "USDC",
-    "outputs": [
-      {
-        "internalType": "contract ERC20",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -634,7 +626,7 @@
     ],
     "name": "mintBatch",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
