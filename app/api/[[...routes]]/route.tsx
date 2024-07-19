@@ -27,8 +27,7 @@ const frontendURL = process.env.NEXT_PUBLIC_FRONTEND as string;
 let contractAdress: string;
 let unitPrice: bigint;
 app.frame("/frame", async (c) => {
-  const { inputText, status } = c;
-
+  const { status } = c;
   const query = c.req.query();
   contractAdress = query.id;
   console.log(query.id);
@@ -54,23 +53,12 @@ app.frame("/frame", async (c) => {
     image: (
       <div
         style={{
-          alignItems: "center",
-          background: "black",
-          backgroundSize: "100% 100%",
           display: "flex",
-          flexDirection: "column",
-          flexWrap: "nowrap",
-          height: "100%",
-          justifyContent: "center",
-          textAlign: "center",
           width: "100%",
+          height: "100%",
         }}
       >
-        <img
-          alt="nft"
-          src={data.image}
-          //style={{ width: "350px", height: "350px" }}
-        />
+        <img alt="nft" src={data.image} style={{ borderRadius: "17px" }} />
       </div>
     ),
     intents: [
